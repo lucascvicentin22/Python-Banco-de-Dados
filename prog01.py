@@ -94,24 +94,44 @@ if __name__ == "__main__":
 
         # Visualizando os dados da tabela tb_estados
         # Criamos o comando de consulta
-        comando = "SELECT * FROM tb_estados"
-         # Executando a consulta
-        resultado = cursor.execute(comando)
+    comando = "SELECT * FROM tb_estados"
+        # Executando a consulta
+    resultado = cursor.execute(comando)
 
-        #Podemos trazer os dados utilizando 3 métodos diferentes
-        # O método fetchone() trás apenas o primeiro resultado da consulta
+    #Podemos trazer os dados utilizando 3 métodos diferentes
+    # O método fetchone() trás apenas o primeiro resultado da consulta
 
-        print(resultado.fetchone())
+    print(resultado.fetchone())
 
-        # O método fetchmny(numero) trás a quantidade de registros indicado 
-        #no parâmetro numero
-        print(resultado.fetchmany(10))
+    # O método fetchmny(numero) trás a quantidade de registros indicado 
+    #no parâmetro numero
+    print(resultado.fetchmany(10))
 
-        # O método fetchall() trás todos os registros restantes da consulta
-        print(resultado.fetchall())
+    # O método fetchall() trás todos os registros restantes da consulta
+    print(resultado.fetchall())
 
-        # É importante notar que, assim como no acesso a aquivos, caso o cursor
-        # interno chegue no final da consulta, será neessario executar a cosulta pra trazer mais
-        # dados. a Linha abaixo retornará None, pois não existem mais registros
-        # a serem lidos
-        print(resultado.fetchone())
+    # É importante notar que, assim como no acesso a aquivos, caso o cursor
+    # interno chegue no final da consulta, será neessario executar a cosulta pra trazer mais
+    # dados. a Linha abaixo retornará None, pois não existem mais registros
+    # a serem lidos
+    print(resultado.fetchone())
+    # Trazendo novamente os dados
+    resultado = cursor.execute(comando)
+
+    # Salvando a lista de registro em uma variavel 
+    estados = resultado.fetchall()
+
+    for estado in estados:
+        saida = f"""
+        Estado: {estado[1]}
+        Sigla: {estado[2]}
+        -------------------------------------------------
+        """
+
+        print(saida)
+
+    # Fechar a conexao so cursor
+    cursor.close()
+
+        # Fechar a conexao com o banco de dados
+    conexao.close()        
